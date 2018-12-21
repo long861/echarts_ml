@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/echarts.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .content {
+            width: 60%;
+            margin: 50px auto;
+            border: solid 1px #a0a0a0;
+            border-radius: 5px;
+        }
+
+        #main {
+            widows: 1000px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <div id="main"></div>
+    </div>
+</body>
+<script>
+    var myEchart = echarts.init(document.getElementById('main'));
+    var options = {
+        backgroundColor: '#2c343c', //设置此标签的背景颜色
+        title: {
+            text: '宣传渠道',
+            textStyle: { color: '#fff' }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)" //{a}：系列名。{b}：数据名。{c}：数据值。{d}：百分比。
+        },
+        legend: {
+            x: 'right',//位置
+            orient: 'vertical',//data竖直排布
+            data: ['视频广告', '联盟广告', '邮件营销', '直接访问', '搜索引擎'],
+            textStyle: { color: '#fff' }
+        },
+        series: {
+            name: '宣传渠道',
+            type: 'pie',
+            radius: '50%', //饼图的半径 //['50%','70%'] 将会形成两个同心圆，数据在外圈同心圆展示
+            data: [
+                { value: 235, name: '视频广告' },
+                { value: 274, name: '联盟广告' },
+                { value: 310, name: '邮件营销' },
+                { value: 335, name: '直接访问' },
+                { value: 400, name: '搜索引擎' }
+            ],
+            //去除roseType属性即为普通的饼状图
+            roseType: 'area',  //是否展示为南丁格尔图，通过半径区分数据大小，可选值：'radius' 扇区圆心角展现数据的百分比，半径展现数据的大小。'area' 所有扇区圆心角相同，仅通过半径展现数据大小。
+            label: { //饼图图形上的文本标签，可用于说明图形的一些数据信息
+                normal: { //可以包含文本的一些设置，如颜色，大小，字体粗细等
+                    textStyle: {
+                        color: 'rgba(255, 255, 255, 0.3)',
+                        fontSize: 14, //字体大小 不加计量单位；
+                        position: 'inside'//标签的位置。可选值：'inner' 同 'inside'饼图扇区内部。'outside'：默认值，饼图扇区外侧，'center'：在饼图中心位置。
+                        
+                    }
+                },
+                formatter: '{b}: {c}'
+            },
+            labelLine: {//标签的视觉引导线样式在 label 位置 设置为'outside'的时候会显示视觉引导线。
+                normal: {
+                    smooth: true, //是否平滑视觉引导线，默认不平滑，可以设置成 true 平滑显示，也可以设置为 0 到 1 的值，表示平滑程度。
+                    lineStyle: {//引导线样式，颜色(color),宽度(width),线的类型(type)['solid'(实线)(默认)/'dashed'(虚线)/'dotted'(密集虚线)]
+                        color: 'rgba(255, 255, 255, 0.3)',
+                        type: 'solid'
+                    }
+                }
+            },
+            // itemStyle: { //图形样式。
+            //     normal: {
+            //         color: '#c23531', //颜色
+            //         shadowBlur: 200, //图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+            //         shadowColor: 'rgba(0, 0, 0, 0.5)', //阴影颜色。
+            //         borderColor:'blue' //图形的描边颜色
+            //     }
+            // }
+        }
+    }
+    myEchart.setOption(options);
+</script>
+
+</html>
